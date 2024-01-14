@@ -1,0 +1,11 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10vh; /* This sets the height to 15% of the viewport height */
+    background-color: #4969b0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
