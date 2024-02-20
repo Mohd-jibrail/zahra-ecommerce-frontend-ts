@@ -4,6 +4,7 @@
     align-items: center;
     padding: 20px;
     background-color: #4969b0;
+    position: relative;
 }
 
 .brand-name {

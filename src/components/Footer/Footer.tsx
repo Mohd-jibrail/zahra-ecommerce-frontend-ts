@@ -4,7 +4,8 @@ import './Footer.css';
 const Footer = () => {
     return (
         <footer className="footer">
-            <p>© 2024 Your Brand. All rights reserved.</p>
+            <h3>© 2024 Zahra Food House.</h3>
+            <p> All rights reserved.</p>
         </footer>
     );
 };

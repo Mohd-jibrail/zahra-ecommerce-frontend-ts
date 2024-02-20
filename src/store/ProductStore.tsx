@@ -1,38 +1,44 @@
-import { useReducer,createContext, Children, ReactNode } from "react";
-
-
-interface IProduct{
+import { useReducer,createContext,ReactNode } from "react";
+interface IUser{
   _id: string
-  name: string
-  description: string
-  prodType: string
-  price: number
-  stock: number
-  ratings: number
-  isAvailable: boolean
-  reviews:{
-      userId: string
-      comments: string
-      rating: number
-      recommend: boolean
-    }[],
+  firstName: string
+  lastName: string
+  email: string
+  contact: string
+  password: string
+  gender: 'male' | 'female'
+  role: 'user' | 'admin'
+  dob: Date
+  address: [
+    {
+      h_No: string
+      city: string
+      zipcode: string
+      state: string
+    },
+  ]
+  cart: [
+    {
+      prodId: string
+      name: string
+      price: number
+      count: number
+    },
+  ]
   createdAt: Date
   updatedAt: Date
-  
+  age: number /*virtua element*/
 }
-interface IProductContext{
-    Products:IProduct[],
-    getProduct:(id:string)=>void;
-    getAllProduct:()=>any
-
+interface IUserContext{
+    User:IUser[],
+    signIn:(id:string)=>any;
 }
-export const ProductContext = createContext<IProductContext>({
-  Products:[],
-  getProduct: () => {},
-  getAllProduct: () => {},
+export const UserContext = createContext<IUserContext>({
+  User:[],
+  signIn: () => {}
 });
 
-const productReducer = (currProducts: IProduct[], action: any): IProduct[] =>{
+const productReducer = (currProducts: IUser[], action: any): IUser[] =>{
     let newProducts = [...currProducts];
   
   return newProducts;
@@ -41,26 +47,23 @@ interface ProductContextProviderProps {
     children: ReactNode;
   }
 const ProductContextProvider: React.FC<ProductContextProviderProps> = ({children}) => {
-    const [Products, dispatchProduct] = useReducer(productReducer, []);
+    const [User, dispatchUser] = useReducer(productReducer, []);
   
-    const getProduct = (id: string) => {
-      
-    };
-  
-    const getAllProduct = ():any => {
-     
+    const signIn = (id: string) => {
+      const signInAction={
+        type:"UPDATE_TASK",
+      }
+      dispatchUser(signInAction);
     };
   
     return (
-      <ProductContext.Provider
+      <UserContext.Provider
         value={{
-          Products,
-          getAllProduct,
-          getProduct
-        }}
-      >
+          User,
+          signIn,
+        }}>
         {children}
-      </ProductContext.Provider>
+      </UserContext.Provider>
     );
   };
   

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './SignUp.css';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
     const [form, setForm] = useState({
@@ -11,6 +12,7 @@ const SignUp = () => {
         password: '',
         gender:''
     });
+    const navigate = useNavigate();
 
     const handleChange = (e:any) => {
         setForm({
@@ -24,7 +26,9 @@ const SignUp = () => {
         console.log(form);
         try {
             const response = await axios.post('http://localhost:3000/api/auth/signUp', form); 
-            console.log(response.data);
+            if(response.data.status==='Success'){
+                navigate('/')
+            }
         } catch (error) {
             console.error(error);
         }

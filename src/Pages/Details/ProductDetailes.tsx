@@ -30,28 +30,31 @@ const ProductDetails: React.FC = () => {
         const fetchData =async () => {
             try{
                 const response = await axios.get(`http://localhost:3000/api/prod/product/${id}`);
-                console.log(response)
                 setProduct(response.data.product)    
             }catch(e){
                 console.log(e)
             }
         }
         fetchData()
-    },[]);
+    });
   return (
-    <div className={style.container}>
-      <div className={style.productImageDiv}>
-        <img  src={img1} alt={img1} className={style.ProductImage} />
-      </div>
-      <div className={style.detailes}>
-        <h2>{product?.name}</h2>
-        <p>{product?.description}</p>
-        <p>Price: ${product?.price} Kg</p>
-        <p>Rating: {product?.ratings}</p>
-        <button className='buyButton' >Buy</button>
-      </div>
-    </div>
-  );
+        <>
+        <table className={style.detailCard}>
+          <tr>
+            <td className={style.productImage}>
+              <img  src={img1} alt={img1} className={style.ProdImage} />
+            </td>
+            <td className={style.productInfo}>
+                <h1>{product?.name}</h1>
+                <p>{product?.description}</p>
+                <p>Price: ${product?.price} Kg</p>
+                <p>Rating: {product?.ratings}</p>
+                <button className='buyButton' >Buy</button>
+            </td>
+          </tr>
+        </table>
+        </>
+    );
 };
 
 export default ProductDetails;
